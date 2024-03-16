@@ -1,0 +1,26 @@
+﻿@model DepartmentViewModel
+@{
+    ViewData["Title"] = "Edit Department";
+}
+<div class="p-4 container">
+    <div class="row p-4">
+        <div class="col-md-12">
+            <h3>Edit Department</h3>
+        </div>
+    </div>
+    <div class="row p-4">
+        <div class="col-md-6">
+            <form asp-controller="Department" asp-action="Edit" method="post">
+                <input hidden asp-for="DepartmentId"/>
+                <div class="mb-3">
+                    <label for="Name" class="form-label fw-bold">Department Name</label>
+                    <input asp-for="Name" type="text" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <button type="submit" style="background-color:green;color:white" class="btn">Submit</button>
+                <a class="btn btn-dark" asp-controller="Department" asp-action="Index">Cancel</a>
+            </form>
+        </div>
+
+    </div>
+</div>

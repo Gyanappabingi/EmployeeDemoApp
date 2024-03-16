@@ -1,0 +1,25 @@
+﻿@model DepartmentViewModel
+@{
+    ViewData["Title"] = "Add new Department";
+}
+<div class="p-4 container">
+    <div class="row p-4">
+        <div class="col-md-12">
+            <h3>Add new Department</h3>
+        </div>
+    </div>
+    <div class="row p-4">
+        <div class="col-md-6">
+            <form asp-controller="Department" asp-action="Add" method="post">
+                <div class="mb-3">
+                    <label for="Name" class="form-label fw-bold">Department Name</label>
+                    <input asp-for="Name" type="text" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <button type="submit" style="background-color:green;color:white" class="btn">Submit</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+    

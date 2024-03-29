@@ -13,7 +13,7 @@ namespace EmployeeDemoApp.Models
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public bool IsActive { get; set; }
-        public string Image { get; set; }
+        public string? Image { get; set; }
 
         [ForeignKey("Deaprtment")]
         public int DepartmentId { get; set; }

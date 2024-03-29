@@ -13,6 +13,7 @@
                    <thead>
                        <tr>
                            <th>#</th>
+                           <th>Image</th>
                             <th>FirstName</th>
                             <th>LastName</th>
                             <th>DateOfBirth</th>
@@ -31,7 +32,9 @@
                         @foreach(var employee in Model)
                         {
                             <tr>
+                                
                                 <td>@employee.EmployeeId</td>
+                                <td> <img src="@employee.Image" alt="Employee Image" style="max-width: 50px; max-height: 50px;" /></td>
                                 <td>@employee.FirstName</td>
                                 <td>@employee.LastName</td>
                                 <td>@employee.DateOfBirth</td>

@@ -32,7 +32,7 @@ namespace EmployeeDemoApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(EmployeeViewModel model, IFormFile image)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var departments = await employeeRepository.getAllDepartments();
                 ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
@@ -61,19 +61,18 @@ namespace EmployeeDemoApp.Controllers
             return View(emp);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(EmployeeViewModel model, IFormFile image)
+        public async Task<IActionResult> Edit(EmployeeViewModel model, IFormFile image,string oldimage)
         {
 
-            //if (ModelState.IsValid==true)
-            //{
-            //    var departments = await employeeRepository.getAllDepartments();
+            if (!ModelState.IsValid)
+            {
+                var departments = await employeeRepository.getAllDepartments();
 
-            //    ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
+                ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
+                model.Image = oldimage;
+                return View(model);
 
-            //    return View(model);
-
-
-            //}
+            }
 
             await employeeRepository.UpdateAsync(model, image);
             

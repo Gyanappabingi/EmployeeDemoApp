@@ -76,7 +76,9 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <input value="@Model.Image" class="form-control" hidden name="oldimage"/>
                     <label asp-for="Image"></label><br />
+
                     <img src="@Model.Image" alt="Employee Image" style="max-width: 200px; max-height: 200px;" /><br />
                     <input type="file" asp-for="Image"  class="form-control-file" />
                     

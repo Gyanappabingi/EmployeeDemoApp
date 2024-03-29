@@ -28,11 +28,13 @@ namespace EmployeeDemoApp.Repository
                 // Save image to server
                 string uploadsFolder = Path.Combine(webhost.WebRootPath, "images");
                 string uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
+              
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                 image.CopyTo(new FileStream(filePath, FileMode.Create));
 
                 // Save image path to database
-                employee.Image = "/images/" + uniqueFileName;
+                //employee.Image = "/images/" + uniqueFileName;
+                employee.Image = uniqueFileName;
             }
 
             var newEmployee = new Employee()
@@ -78,6 +80,7 @@ namespace EmployeeDemoApp.Repository
                     Gender = employee.Gender,
                     Email = employee.Email,
                     Address = employee.Address,
+                    Image=employee.Image,
                     IsActive = employee.IsActive,
                    
                 };
@@ -118,13 +121,16 @@ namespace EmployeeDemoApp.Repository
                 IsActive = employee.IsActive,
                 Department=employee.Department,
                 DepartmentId=employee.DepartmentId,
-                Image=employee.Image,
+                Image= "/images/"+employee.Image, //employee.Image,
             };
             return employeeViewModel;
         }
 
         public async Task UpdateAsync(EmployeeViewModel employeeUpdated, IFormFile image)
         {
+           
+
+            
             var existingemployee = await db.Employees.FindAsync(employeeUpdated.EmployeeId);
 
             
@@ -133,14 +139,30 @@ namespace EmployeeDemoApp.Repository
                 // Save image to server
                 string uploadsFolder = Path.Combine(webhost.WebRootPath, "images");
                 string uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
+
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                //delete old file path
+                string oldfilePath = Path.Combine(uploadsFolder, existingemployee.Image);
+                if (image != null)
+                {
+                    if (System.IO.File.Exists(oldfilePath))
+                    {
+                        System.IO.File.Delete(oldfilePath);
+                    }
+                    
+                }
+
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     await image.CopyToAsync(fileStream);
                 }
 
+
+
+
                 // Save image path to database
-                employeeUpdated.Image = "/images/" + uniqueFileName;
+                employeeUpdated.Image = uniqueFileName;  
 
 
 
@@ -197,6 +219,8 @@ namespace EmployeeDemoApp.Repository
                     Department = employee.Department,
                     DepartmentId = employee.DepartmentId,
                     IsActive = employee.IsActive,
+                   // Image =  employee.Image,
+                     Image= "/images/" + employee.Image,
                 };
                 employeeViewModels.Add(viewModel);
             }

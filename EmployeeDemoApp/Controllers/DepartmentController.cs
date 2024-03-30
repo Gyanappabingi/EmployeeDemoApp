@@ -30,6 +30,7 @@ namespace EmployeeDemoApp.Controllers
             {
                 return View(model);
             }
+            TempData["AlertMessage"] = "Department added successfully...";
            await _departmentRepository.AddAsync(model);
             return RedirectToAction("Index", "Department");
         }
@@ -37,6 +38,7 @@ namespace EmployeeDemoApp.Controllers
         public async Task<IActionResult> Delete(int id)
         {
            await _departmentRepository.DeleteAsync(id);
+            TempData["AlertMessage"] = "Department deleted successfully...";
             return RedirectToAction("Index", "Department");
         }
 
@@ -56,6 +58,7 @@ namespace EmployeeDemoApp.Controllers
             }
 
            await _departmentRepository.UpdateAsync(model);
+            TempData["AlertMessage"] = "Department updated successfully...";
             return RedirectToAction("Index", "Department");
         }
     }

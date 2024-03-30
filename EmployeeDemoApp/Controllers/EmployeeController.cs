@@ -39,12 +39,14 @@ namespace EmployeeDemoApp.Controllers
                 return View(model);
             }
             await employeeRepository.AddAsync(model, image);
+            TempData["AlertMessage"] = "Employee added successfully...";
             return RedirectToAction("Index", "Employee");
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
            await employeeRepository.DeleteAsync(id);
+            TempData["AlertMessage"] = "Employee deleted successfully...";
             return RedirectToAction("Index", "Employee");
         }
 
@@ -75,7 +77,7 @@ namespace EmployeeDemoApp.Controllers
             }
 
             await employeeRepository.UpdateAsync(model, image);
-            
+            TempData["AlertMessage"] = "Employee updated successfully...";
 
             return RedirectToAction("Index", "Employee");
         }

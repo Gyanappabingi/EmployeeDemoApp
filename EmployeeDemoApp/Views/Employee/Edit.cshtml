@@ -80,13 +80,37 @@
                     <label asp-for="Image"></label><br />
 
                     <img src="@Model.Image" alt="Employee Image" style="max-width: 200px; max-height: 200px;" /><br />
-                    <input type="file" asp-for="Image"  class="form-control-file" />
-                    
+                    <input type="file" asp-for="Image" class="form-control-file" accept="image/*" onchange="previewImage(event)" />
                 </div>
+                <div id="imagePreview"></div>
+                <br />
                 <br />
                 <button type="submit" style="background-color:green;color:white" class="btn">Submit</button>
                 <a class="btn btn-dark" asp-controller="Employee" asp-action="Index">Cancel</a>
             </form>
+
+            @section Scripts {
+                <script>
+                    function previewImage(event) {
+                        var imagePreview = document.getElementById('imagePreview');
+                        var file = event.target.files[0];
+                        var reader = new FileReader();
+
+                        reader.onload = function () {
+                            var img = document.createElement('img');
+                            img.src = reader.result;
+                            img.style.maxWidth = '200px';
+                            imagePreview.innerHTML = '';
+                            imagePreview.appendChild(img);
+                        }
+
+                        if (file) {
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                </script>
+            }
+
         </div>
     </div>
 </div>

@@ -45,7 +45,7 @@
                             <label class="form-check-label fw-bold" for="Gender">
                                 Female
                                 </label>
-                           >
+                           
                         </div>
 
                     </div>
@@ -78,11 +78,34 @@
                 </div>
                 <div class="mb-3">
                     <label>Choose Image</label>
-                    <input type="file" asp-for="Image"  class="form-control-file" />
+                    <input type="file" asp-for="Image" class="form-control-file" accept="image/*" onchange="previewImage(event)" />
                 </div>
-                
+                <div id="imagePreview"></div>
+                <br />
                 <button type="submit" style="background-color:green;color:white"  class="btn">Submit</button>
+                <button type="submit" asp-controller="Employee" asp-action="Index"  class="btn btn-primary">Back</button>
             </form>
+            @section Scripts {
+                <script>
+                    function previewImage(event) {
+                        var imagePreview = document.getElementById('imagePreview');
+                        var file = event.target.files[0];
+                        var reader = new FileReader();
+
+                        reader.onload = function () {
+                            var img = document.createElement('img');
+                            img.src = reader.result;
+                            img.style.maxWidth = '200px';
+                            imagePreview.innerHTML = '';
+                            imagePreview.appendChild(img);
+                        }
+
+                        if (file) {
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                </script>
+            }
         </div>
     </div>
 </div>

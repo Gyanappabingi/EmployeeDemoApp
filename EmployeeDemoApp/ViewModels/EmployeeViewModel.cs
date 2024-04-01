@@ -29,6 +29,7 @@ namespace EmployeeDemoApp.ViewModels
         [Required(ErrorMessage = "number is required")]
         [Phone(ErrorMessage = "Invalid number")]
         [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be 10 digits")]
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Address is required")]

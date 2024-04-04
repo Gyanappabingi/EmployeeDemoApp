@@ -2,6 +2,8 @@
 @model EmployeeViewModel
 @{
     ViewData["Title"] = "All Employees";
+    var today = DateTime.Now.Date.ToString("yyyy-MM-dd");
+
 }
 <div class="p-4 container">
     <div class="row p-4">
@@ -24,7 +26,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="datepicker" class="form-label fw-bold">Date of Birth</label>
-                    <input asp-for="DateOfBirth" type="Date" class="form-control" />
+                    <input asp-for="DateOfBirth" max="@today" type="Date" class="form-control" />
                     <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                 </div>
                 <div class="mb-3">

@@ -1,7 +1,7 @@
 ﻿@model EmployeeViewModel
 @{
     ViewData["Title"] = "Edit Employee";
-    var today = DateTime.Now.Date.ToString("yyyyy-MM-dd");
+    var today = DateTime.Now.Date.ToString("yyyy-MM-dd");
 }
 <div class="p-4 container">
     <div class="row p-4">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="mb-3">
                     <div class="form-check">
-                        <input asp-for="IsActive" class="form-check-input" type="checkbox" id="isActive" checked />
+                        <input asp-for="IsActive" class="form-check-input" type="checkbox" id="isActive"  />
                         <label class="form-check-label fw-bold" for="isActive">Mark as Active</label>
                     </div>
                 </div>

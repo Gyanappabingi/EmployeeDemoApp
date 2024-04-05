@@ -11,9 +11,11 @@ namespace EmployeeDemoApp.ViewModels
         public int EmployeeId { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only alphabetic characters are allowed.")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "LastName is required")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only alphabetic characters are allowed.")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "DOB is required")]

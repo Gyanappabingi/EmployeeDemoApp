@@ -108,6 +108,7 @@ namespace EmployeeDemoApp.Repository
         public async Task<EmployeeViewModel> GetByidAsync(int id)
         {
             var employee = await db.Employees.FindAsync(id);
+
             var employeeViewModel = new EmployeeViewModel()
             {
                 EmployeeId = employee.EmployeeId,
@@ -121,7 +122,7 @@ namespace EmployeeDemoApp.Repository
                 IsActive = employee.IsActive,
                 Department=employee.Department,
                 DepartmentId=employee.DepartmentId,
-                Image= "/images/"+employee.Image, //employee.Image,
+                Image= employee.Image, //employee.Image,
             };
             return employeeViewModel;
         }

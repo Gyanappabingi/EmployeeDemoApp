@@ -9,10 +9,10 @@ namespace EmployeeDemoApp.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository employeeRepository;
-       
-        public EmployeeController(IEmployeeRepository employeeRepository) { 
+        private readonly IWebHostEnvironment webhost;
+        public EmployeeController(IEmployeeRepository employeeRepository, IWebHostEnvironment webhost) { 
             this.employeeRepository = employeeRepository;
-          
+            this.webhost = webhost;
         }
         public async Task<IActionResult> Index()
         {
@@ -45,7 +45,19 @@ namespace EmployeeDemoApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-           await employeeRepository.DeleteAsync(id);
+            var existingemployee = await employeeRepository.GetByidAsync(id);
+
+            string uploadsFolder = Path.Combine(webhost.WebRootPath, "images");
+            string oldfilePath = Path.Combine(uploadsFolder, existingemployee.Image);
+
+            if (System.IO.File.Exists(oldfilePath))
+            {
+                System.IO.File.Delete(oldfilePath);
+                
+            }
+           
+            await employeeRepository.DeleteAsync(id);
+
             TempData["AlertMessage"] = "Employee deleted successfully...";
             return RedirectToAction("Index", "Employee");
         }
@@ -56,7 +68,8 @@ namespace EmployeeDemoApp.Controllers
             var departments = await employeeRepository.getAllDepartments();
             
             var emp=await employeeRepository.GetByidAsync(id);
-
+           
+            emp.Image = "/images/" +emp.Image;
             ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
 
             

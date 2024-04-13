@@ -20,7 +20,7 @@ namespace EmployeeDemoApp.ViewModels
 
         [Required(ErrorMessage = "DOB is required")]
         [DataType(DataType.Date)]
-        public DateTime DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Gender is required")]
         public string Gender { get; set; }

@@ -30,7 +30,13 @@ namespace EmployeeDemoApp.Repository
                 string uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
               
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                image.CopyTo(new FileStream(filePath, FileMode.Create));
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(fileStream);
+                }
+
+               // image.CopyTo(new FileStream(filePath, FileMode.Create));
 
                 // Save image path to database
                 //employee.Image = "/images/" + uniqueFileName;

@@ -2,12 +2,7 @@
 @{
     ViewData["Title"] = "All Department";
 }
-@if (TempData["AlertMessage"]!=null)
-{
-    <div class="alert alert-success">
-        <strong>Success ! </strong>@TempData["AlertMessage"]
-    </div>
-}
+<partial name="_Notification"></partial>
 <br />
 <div class="container p-4">
     <div class="row">

@@ -41,6 +41,7 @@ namespace EmployeeDemoApp.Controllers
             await employeeRepository.AddAsync(model, image);
             TempData["AlertMessage"] = "Employee added successfully...";
             return RedirectToAction("Index", "Employee");
+           
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
